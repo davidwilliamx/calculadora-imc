@@ -13,7 +13,7 @@ const alertaUrgente = document.querySelector(".alerta-urgente");
 peso.value = "";
 altura.value = "";
 
-button.addEventListener("click", fractionDigits => {
+button.addEventListener("click",fractionDigits => {
     let valorPeso = Number(peso.value);
     let valorAltura = Number(altura.value);
     console.log('Valor de peso alterado - ' + valorPeso);
