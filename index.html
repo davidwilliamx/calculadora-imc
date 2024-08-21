@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Calculadora IMC</title>
     <link rel="stylesheet" href="./assets/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 <div class="px-4 pt-5 my-5 text-center border-bottom">
-    <h1 class="display-4 fw-bold text-body-emphasis">Calculadora de IMC</h1>
+    <h1 class="display-1 fw-bold text-body-emphasis">Calculadora de IMC</h1>
     <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">O índice de massa corporal é uma medida internacional usada para calcular se uma pessoa está no peso ideal. Desenvolvido pelo polímata Lambert Quételet no fim do século XIX, trata-se de um método fácil e rápido para a avaliação do nível de gordura de cada pessoa, sendo, por isso, um preditor internacional de obesidade adotado pela Organização Mundial da Saúde.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
@@ -20,9 +21,32 @@
 <div class="container col-xl-10 col-xxl-8 px-4 py-5">
     <div class="row align-items-center g-lg-5 py-5" id="calculadora">
         <div class="col-lg-7 text-center text-lg-start">
-            <h2 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Seu IMC é: <strong id="imc"></strong></h2>
-            <p class="col-lg-10 fs-4 texto-padrao">Como chegamos ao índice de massa corporal de um adulto é o seu peso em quilos (por exemplo, 80 kg), dividido por sua altura ao quadrado (vamos imaginar, 1,80 m x 1,80 m).</p>
-            <p class="alert alert-warning col-lg-10 w-100 fs-6" role="alert">An example warning alert with an icon</p>
+            <h2 class="display-3 fw-bold lh-1 mb-3">Seu IMC é: <strong id="imc"></strong></h2>
+            <p class="col-lg-10 fs-4 text-body mensagemPadrao">Como chegamos ao índice de massa corporal de um adulto é o seu peso em quilos (por exemplo, 80 kg), dividido por sua altura ao quadrado (vamos imaginar, 1,80 m x 1,80 m).</p>
+            <div class="alert alert-danger col-lg-10 w-100 fs-6 d-none mensagemAbaixoDoPeso" role="alert">
+                <h6 class="fs-5 fw-bold">Abaixo do peso (Abaixo de 18,5)</h6>
+                <p class="text-body">Nesses casos, é importante procurar um médico ou nutricionista para entender se existe um quadro de desnutrição ou a presença de alguma outra condição relacionada ao baixo peso.</p>
+            </div>
+            <div class="alert alert-success col-lg-10 w-100 fs-6 d-none mensagemPesoNormal" role="alert">
+                <h6 class="fs-5 fw-bold">Peso normal (18,5 a 24,9)</h6>
+                <p class="text-body">O peso normal é o seu peso ideal! Para mantê-lo, é importante priorizar uma alimentação saudável, praticar atividade física, ter um sono de qualidade e cuidar da saúde de forma integral.</p>
+            </div>
+            <div class="alert alert-info col-lg-10 w-100 fs-6 d-none mensagemSobrepeso" role="alert">
+                <h6 class="fs-5 fw-bold">Sobrepeso (25 a 29,9)</h6>
+                <p class="text-body">O sobrepeso serve como um alerta e deve receber atenção, já que pode evoluir para um quadro de obesidade, além de apresentar, em alguma medida, maiores riscos para a saúde.</p>
+            </div>
+            <div class="alert alert-warning col-lg-10 w-100 fs-6 d-none mensagemObesidade1" role="alert">
+                <h6 class="fs-5 fw-bold">Obesidade I (30,0 a 34,9)</h6>
+                <p class="text-body">A obesidade é uma doença que requer tratamento e acompanhamento profissional. Mesmo que os exames estejam estáveis, é importante realizar mudanças de hábitos para evitar agravamentos.</p>
+            </div>
+            <div class="alert alert-danger col-lg-10 w-100 fs-6 d-none mensagemObesidade2" role="alert">
+                <h6 class="fs-5 fw-bold">Obesidade II (35,0 a 39,9)</h6>
+                <p class="text-body">A obesidade é uma doença que requer tratamento e acompanhamento profissional. Mesmo que os exames estejam estáveis, é importante realizar mudanças de hábitos para evitar agravamentos.</p>
+            </div>
+            <div class="alert alert-danger col-lg-10 w-100 fs-6 d-none mensagemObesidade3" role="alert">
+                <h6 class="fs-5 fw-bold">Obesidade III (Acima de 40)</h6>
+                <p class="text-body">A obesidade de grau 3 é o tipo mais agressivo. Nesse estágio, é comum a presença de outras doenças relacionadas e, assim, o tratamento se torna ainda mais urgente e inadiável.</p>
+            </div>
         </div>
         <div class="col-md-10 mx-auto col-lg-5">
             <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
@@ -34,9 +58,16 @@
                     <input type="text" class="form-control alturaUsuario" id="inputAltura" placeholder="Altura(cm)">
                     <label for="inputAltura">Altura(cm)</label>
                 </div>
-                <input type="button" class="w-100 btn btn-lg btn-primary" id="botao" value="Calcular">
+                <div class="d-flex gap-1 mb-3">
+                    <input type="button" class="flex-grow-1 w-75 btn btn-lg btn-primary" id="botaoCalcular" value="Calcular">
+                    <input type="button" class="flex-grow-1 w-25 btn btn-lg btn-danger" id="botaoReset" value="Reset">
+                </div>
                 <hr class="my-4">
-                <small class="alerta-padrao text-body-secondary text-center">Pressione o botão para calcular o seu Índice de Massa Corporal.</small>
+                <small class="small infoPadrao"><p class="text-body-secondary">Pressione o botão para calcular o seu Índice de Massa Corporal.</p></small>
+                <small class="small erroVazio d-none"><p class="text-danger"><i class="bi bi-exclamation-circle text-danger"></i> Você deve inserir valores nos campos.</p></small>
+                <small class="small erroNumero d-none"><p class="text-danger"><i class="bi bi-exclamation-circle text-danger"></i> Apenas números devem ser informados.</p></small>
+                <small class="small erroNegativo d-none"><p class="text-danger"><i class="bi bi-exclamation-circle text-danger"></i> Números negativos não são válidos.</p></small>
+                <small class="small erroLimite d-none"><p class="text-danger"><i class="bi bi-exclamation-circle text-danger"></i> Os números informados estão fora do limite.</p></small>
             </form>
         </div>
     </div>
